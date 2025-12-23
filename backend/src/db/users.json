@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "nombre": "Juan Perez",
+    "mail": "juan.perez@example.com",
+    "contraseña": "jp1234",
+    "codigo_postal": "1407",
+    "fecha_creacion": "2023-05-10",
+    "cantidad_plata": 12500.75,
+    "ultimo_deposito": 2500
+  },
+  {
+    "id": 2,
+    "nombre": "Maria Gomez",
+    "mail": "maria.gomez@example.com",
+    "contraseña": "mg2023",
+    "codigo_postal": "1874",
+    "fecha_creacion": "2022-11-03",
+    "cantidad_plata": 8450.00,
+    "ultimo_deposito": 1500
+  },
+  {
+    "id": 3,
+    "nombre": "Luis Martinez",
+    "mail": "luis.martinez@example.com",
+    "contraseña": "lm7890",
+    "codigo_postal": "1605",
+    "fecha_creacion": "2024-01-20",
+    "cantidad_plata": 30200.50,
+    "ultimo_deposito": 5000
+  },
+  {
+    "id": 4,
+    "nombre": "Carla Ruiz",
+    "mail": "carla.ruiz@example.com",
+    "contraseña": "cr5566",
+    "codigo_postal": "5500",
+    "fecha_creacion": "2021-09-12",
+    "cantidad_plata": 7400,
+    "ultimo_deposito": 1200
+  },
+  {
+    "id": 5,
+    "nombre": "Fernando Torres",
+    "mail": "fernando.torres@example.com",
+    "contraseña": "ft0011",
+    "codigo_postal": "1704",
+    "fecha_creacion": "2020-02-25",
+    "cantidad_plata": 90500,
+    "ultimo_deposito": 10000
+  },
+  {
+    "id": 6,
+    "nombre": "Lucia Alvarez",
+    "mail": "lucia.alvarez@example.com",
+    "contraseña": "la7788",
+    "codigo_postal": "8000",
+    "fecha_creacion": "2023-03-14",
+    "cantidad_plata": 2650,
+    "ultimo_deposito": 650
+  },
+  {
+    "id": 7,
+    "nombre": "Santiago Romero",
+    "mail": "santiago.romero@example.com",
+    "contraseña": "sr3333",
+    "codigo_postal": "1220",
+    "fecha_creacion": "2022-07-18",
+    "cantidad_plata": 18000,
+    "ultimo_deposito": 3000
+  },
+  {
+    "id": 8,
+    "nombre": "Valeria Diaz",
+    "mail": "valeria.diaz@example.com",
+    "contraseña": "vd4444",
+    "codigo_postal": "4000",
+    "fecha_creacion": "2024-05-01",
+    "cantidad_plata": 5200,
+    "ultimo_deposito": 900
+  },
+  {
+    "id": 9,
+    "nombre": "Javier Soto",
+    "mail": "javier.soto@example.com",
+    "contraseña": "js9999",
+    "codigo_postal": "5000",
+    "fecha_creacion": "2021-12-30",
+    "cantidad_plata": 150000,
+    "ultimo_deposito": 20000
+  },
+  {
+    "id": 10,
+    "nombre": "Florencia Herrera",
+    "mail": "florencia.herrera@example.com",
+    "contraseña": "fh2222",
+    "codigo_postal": "7600",
+    "fecha_creacion": "2019-04-08",
+    "cantidad_plata": 4500,
+    "ultimo_deposito": 400
+  }
+]
