@@ -1,18 +1,16 @@
 import express from "express" // -> ESmodules // const express = require("express") -> commonjs [obsoleto]
 import cors from "cors";
-import dotenv from "dotenv";
-import { connectDB } from "./config/db";
 
+import { connectDB, sequelize } from "./config/db.js";
 import usersRouter from "./routes/users.route.js"
 
-connectDB();
+await connectDB();
+await sequelize.sync();
 
 const app = express();
 app.use(express.json())
 
 app.use(cors({ origin: true }));
-
-dotenv.config();
 
 /*
 app.get("/ping", (_req, res) =>{
