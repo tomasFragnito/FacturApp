@@ -3,7 +3,7 @@ const inputPass = document.getElementById("inputPass");
 
 const btnLogin = document.getElementById("btnLogin");
 
-btnLogin.addEventListener("click", searchUser);
+btnLogin.addEventListener("click", loginUser);
 
 const PORT = 3000;
 
@@ -18,7 +18,7 @@ async function searchUser(){
 }
 
 async function loginUser(){
-    const user = await fetch(PORT+"/user/login",
+    const res = await fetch(PORT+"/user/login",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -28,7 +28,13 @@ async function loginUser(){
         }
     );
     
-    const userData = await user.json();
+    if (!res.ok) {
+        console.error("Credenciales inválidas");
+        return;
+    }
+
+    console.log("Login OK");
+    //window.location.href = "/index.html";
         
 }
 

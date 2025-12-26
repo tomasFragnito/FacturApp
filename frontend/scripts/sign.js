@@ -1,6 +1,6 @@
-const inputName = document.getElementById("inputName").value;
-const inputEmail = document.getElementById("inputEmail").value;
-const inputPass = document.getElementById("inputPass").value;
+const inputName = document.getElementById("inputName");
+const inputEmail = document.getElementById("inputEmail");
+const inputPass = document.getElementById("inputPass");
 
 const btnSign = document.getElementById("btnSign");
 
@@ -8,7 +8,7 @@ btnSign.addEventListener("click", registerUser);
 
 const PORT = 3000;
 
-console.log(inputName,inputEmail,inputPass);
+console.log(inputName.value,inputEmail.value,inputPass.value);
 
 async function registerUser(){
     const user = await fetch("http://localhost:"+PORT+"/users/sign", {
@@ -17,9 +17,9 @@ async function registerUser(){
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            name: inputName,
-            email: inputEmail,
-            password: inputPass,
+            name: inputName.value,
+            email: inputEmail.value,
+            password: inputPass.value,
         }),
     });
     

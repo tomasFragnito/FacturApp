@@ -19,6 +19,12 @@ app.get("/ping", (_req, res) =>{
 })
 */
 
+app.use((req, _res, next) => {
+  console.log(req.method, req.path);
+  next();
+});
+
+
 app.use("/users", usersRouter);
 
 export default app;

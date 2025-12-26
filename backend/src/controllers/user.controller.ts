@@ -12,6 +12,20 @@ export const checkUser = async (req: Request, res: Response): Promise<Response> 
   return res.json({ exists });
 };
 
+export const login = async (req: Request, res: Response): Promise<Response> => {
+  const { email } = req.query;
+
+  if (!email || typeof email !== "string") {
+    return res.status(400).json({ error: "Email requerido" });
+  }
+
+  const exists = await userService.userExists(email);
+
+  res.redirect("/index.html");
+   
+  return res.json({ exists });
+};
+
 export const register = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const { name, email, password } = req.body;
