@@ -1,14 +1,13 @@
 import express from "express" 
-import { checkUser, register, hello, login } from '../controllers/user.controller.js';
-
+import { register, hello, login } from '../controllers/user.controller.js';
+//import { authenticateToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router()
-
-router.get('/exists', checkUser);
 
 router.post('/sign', register);
 
 router.post('/login', login);
+//router.post('/hello', authenticateToken, hello);
 
 router.get('/hello', hello);
 

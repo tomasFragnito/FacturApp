@@ -10,7 +10,11 @@ await sequelize.sync();
 const app = express();
 app.use(express.json())
 
-app.use(cors({ origin: true }));
+const allowedOrigin = "http://127.0.0.1:5500";
+
+//app.use(cors({ origin: true }));
+app.use(cors({ origin: allowedOrigin }));
+
 
 /*
 app.get("/ping", (_req, res) =>{
