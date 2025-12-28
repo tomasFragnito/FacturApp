@@ -4,7 +4,8 @@
 }
 
 html, body{
-    background: #d4ffeb;
+    background: rgb(245, 245, 220);
+    color: #000000;
     height: 100vh;
     font-family: "Times New Roman", Times, serif;
 }

@@ -1,14 +1,15 @@
 import express from "express" 
 import { checkUser, register, hello, login } from '../controllers/user.controller.js';
-
+import { encodedPassword, decodedPassword } from "../middleware/crypto.js";
+import { loadUser } from "../middleware/userMiddlewares.js"
 
 const router = express.Router()
 
 router.get('/exists', checkUser);
 
-router.post('/sign', register);
+router.post('/sign', encodedPassword, register);
 
-router.post('/login', login);
+router.post('/login',loadUser, decodedPassword, login);
 
 router.get('/hello', hello);
 
