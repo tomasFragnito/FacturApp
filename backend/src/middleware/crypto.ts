@@ -1,14 +1,24 @@
 import crypto from "crypto";
 import { Request, Response, NextFunction } from "express";
 
-const CODE = process.env.CODE_AES;
+function getKey(): Buffer {
+  const code = process.env.CODE_AES;
 
-if (!CODE) {
-  throw new Error("Falta la variable CODE_AES en el archivo .env");
+  if (!code) {
+    throw new Error("CODE_AES no está definida");
+  }
+
+  if (!/^[0-9a-fA-F]{64}$/.test(code)) {
+    throw new Error("CODE_AES debe ser HEX de 64 caracteres");
+  }
+
+  return Buffer.from(code, "hex");
 }
+
 
 export const encodedPassword = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const KEY = getKey();
     const { password } = req.body;
 
     if (!password) {
@@ -17,7 +27,7 @@ export const encodedPassword = async (req: Request, res: Response, next: NextFun
     }
 
     const iv = crypto.randomBytes(12);
-    const cipher = crypto.createCipheriv("aes-256-gcm", CODE, iv);
+    const cipher = crypto.createCipheriv("aes-256-gcm", KEY, iv);
 
     let encoded = cipher.update(password, "utf8", "hex");
     encoded += cipher.final("hex");
@@ -39,6 +49,7 @@ export const encodedPassword = async (req: Request, res: Response, next: NextFun
 
 export const decodedPassword = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const KEY = getKey();
     const { user } = req;
     const { password } = req.query;
 
@@ -54,7 +65,7 @@ export const decodedPassword = async (req: Request, res: Response, next: NextFun
     const iv = Buffer.from(user.iv, "hex");
     const authTag = Buffer.from(user.authTag, "hex");
 
-    const decipher = crypto.createDecipheriv("aes-256-gcm", CODE, iv);
+    const decipher = crypto.createDecipheriv("aes-256-gcm", KEY, iv);
     decipher.setAuthTag(authTag);
 
     let decoded = decipher.update(user.password, "hex", "utf8");

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as userService from "../services/user.service.js";
 
 
-export const login = async (req: Request, res: Response): Promise<Response> => {
+export const logsin = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
 
   if (!email || !password || typeof email !== "string" || typeof password !== "string") {
@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-export const logisn = async (req: Request, res: Response): Promise<Response> => {
+export const login = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.query;
 
   if (!email || typeof email !== "string") {

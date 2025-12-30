@@ -5,7 +5,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "dev": "nodemon --exec node --env-file=.env --loader ts-node/esm --inspect ./src/server.ts",
+    "dev": "nodemon --exec node --trace-uncaught --loader ts-node/esm --inspect ./src/server.ts",
+    "_comment": "nodemon --exec node --trace-uncaught --env-file=.env --loader ts-node/esm --inspect ./src/server.ts",
     "tsc": "tsc",
     "start": "node build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
