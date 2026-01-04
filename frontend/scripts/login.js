@@ -5,7 +5,6 @@ const btnLogin = document.getElementById("btnLogin");
 
 btnLogin.addEventListener("click", loginUser);
 
-
 const PORT = 3000;
 
 
@@ -19,24 +18,23 @@ async function searchUser(){
 }
 
 async function loginUser(){
-    console.log(inputEmail.value + inputPass.value)
-    const res = await fetch("http://localhost:"+PORT+"/users/login",
+    const res = await fetch(PORT+"/user/login",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: inputEmail.value, password: inputPass.value }),
+            // Automatically converted to "username=example&password=password"
+            body: new URLSearchParams({ email: inputEmail, password: inputPass }),
             mode: "cors"
         }
     );
-    console.log(res.status)
-    console.log(res.body)
+    
     if (!res.ok) {
         console.error("Credenciales inválidas");
         return;
     }
 
     console.log("Login OK");
-    window.location.href = "/frontend/screen/index.html";
+    //window.location.href = "/index.html";
         
 }
 

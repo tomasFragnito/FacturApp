@@ -1,13 +1,14 @@
 import express from "express" 
-import { register, hello, login } from '../controllers/user.controller.js';
-import { encodedPassword, decodedPassword } from "../middleware/crypto.js";
-import { loadUser } from "../middleware/userMiddlewares.js"
+import { checkUser, register, hello, login } from '../controllers/user.controller.js';
+
 
 const router = express.Router()
 
-router.post('/sign', encodedPassword, register);
+router.get('/exists', checkUser);
 
-router.post('/login',loadUser, decodedPassword, login);
+router.post('/sign', register);
+
+router.post('/login', login);
 
 router.get('/hello', hello);
 

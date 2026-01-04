@@ -6,8 +6,6 @@ export class User extends Model {
   declare name: string;
   declare email: string;
   declare password: string;
-  declare iv: string;
-  declare authTag: string;
 }
 
 User.init(
@@ -16,7 +14,6 @@ User.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -29,13 +26,6 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    iv: {
-      type: DataTypes.STRING,
-    },
-    authTag: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
   },
   {

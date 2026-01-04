@@ -1,33 +1,15 @@
 import { Request, Response } from "express";
 import * as userService from "../services/user.service.js";
 
+export const checkUser = async (req: Request, res: Response): Promise<Response> => {
+  const { email } = req.query;
 
-export const logsin = async (req: Request, res: Response): Promise<Response> => {
-  const { email, password } = req.body;
-
-  if (!email || !password || typeof email !== "string" || typeof password !== "string") {
-    console.error("Faltan credenciales en el cuerpo de la solicitud (req.body)");
-    return res.status(400).json({ error: "Email y contraseña son obligatorios." });
+  if (!email || typeof email !== "string") {
+    return res.status(400).json({ error: "Email requerido" });
   }
 
-  try {
-
-    // Esta función DEBE verificar el email y HASH de la contraseña.
-    //const user = await userService.authenticateUser(email, password); // <- Asumimos que creaste esta función
-
-    //if (!user) {
-      // Si las credenciales no coinciden (email existe pero pass es incorrecto, o email no existe)
-      //return res.status(401).json({ error: "Credenciales inválidas" });
-    //}
-
-    return res.status(200).json({ 
-      message: "Login exitoso",
-    });
-
-  } catch (error) {
-    console.error("Error durante el login:", error);
-    return res.status(500).json({ error: "Error interno del servidor." });
-  }
+  const exists = await userService.userExists(email);
+  return res.json({ exists });
 };
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
