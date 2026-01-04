@@ -1,0 +1,33 @@
+Versionado NodeJs
+    se utilizo la version de NodeJs v20.11.1 debido que la version v24.12.0 de NodeJs
+    resulto ser inestable durante el desarrollo, provocando crasheos por errores de tipo
+    genericos y asociados a la utilizacion de imports, al no encontrar el origen exacto del error,
+    se opto por mover el proyecto a un versionado más estable y confiable como la version v20 de NodeJs
+    lo cual soluciono el problema de inestabilidad y errores fantasmas. Un bug de v24 + ESM.
+
+    -clase de errores muestreados -> [Object: null prototype] triggerUncaughtException
+
+se opto por bcryptjs y no por bcrypt por temas de estabilidad
+  
+
+
+
+tasks:
+    screen_
+        login
+        register
+        
+        index_ (rederidige al menu con una animacion)
+            menu (nombre de usuario + plata)
+            transferencia
+
+    backend_
+        moneyUser
+
+        password_
+            reemplazar pass por cifrado por Hash y sal utilizando bcrypt
+
+        sql_
+            tabla user(idUser,name, mail, password)
+            tabla transferencias(idUser, id)
+    

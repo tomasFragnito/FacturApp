@@ -1,37 +1,43 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/db.js';
+//import { timeStamp } from 'console';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export class User extends Model {
   declare id: number;
   declare name: string;
   declare email: string;
   declare password: string;
+  declare created_at?: Date;
 }
 
-User.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+export function initUserModel(sequelizeInstance: Sequelize) {
+  User.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING(150),
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,
-    tableName: 'users',
-    timestamps: false,
-  }
-);
-
+    {
+      sequelize: sequelizeInstance,
+      tableName: 'users',
+      timestamps: false,
+    }
+  );
+}

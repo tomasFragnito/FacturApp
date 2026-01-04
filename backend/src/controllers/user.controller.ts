@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as userService from "../services/user.service.js";
+import * as userService from "../services/user.service";
 
 export const checkUser = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.query;
@@ -12,40 +12,61 @@ export const checkUser = async (req: Request, res: Response): Promise<Response> 
   return res.json({ exists });
 };
 
-export const login = async (req: Request, res: Response): Promise<Response> => {
-  const { email } = req.query;
+export const hello = async (_req: Request, res: Response): Promise<Response> => {
 
-  if (!email || typeof email !== "string") {
-    return res.status(400).json({ error: "Email requerido" });
-  }
-
-  const exists = await userService.userExists(email);
-
-  res.redirect("/index.html");
-   
-  return res.json({ exists });
+  return res.json("hello");
 };
 
-export const register = async (req: Request, res: Response): Promise<Response | void> => {
+export const loginController = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  const user = await userService.validateLogin(email, password);
+
+  if (!user) {
+    res.status(401).json({ error: "Credenciales inválidas" });
+    return;
+  }
+
+  res.status(200).json({
+    message: "Login OK",
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name
+    }
+  });
+};
+
+export const register = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-      return res.status(400).json({ error: 'Datos incompletos' });
+      return res.status(400).json({ error: "Datos incompletos" });
     }
 
-    const user = await userService.registerUser(name, email, password);
-    return res.status(201).json(user);
-  } catch (err) {
-    console.error(err);
-  }
-};
+    // password YA viene hasheada desde el middleware
+    const user = await userService.registerUser(
+      name,
+      email,
+      password
+    );
 
-export const hello = async (_req: Request, res: Response): Promise<Response | void> => {
-  try {
-    console.log("OK")
-    return res.status(200);
-  } catch (err) {
+    return res.status(201).json({
+      id: user.id,
+      name: user.name,
+      email: user.email
+    });
+  } catch (err: any) {
     console.error(err);
+
+    if (err.status) {
+      return res.status(err.status).json({ error: err.message });
+    }
+
+    return res.status(500).json({ error: "Error interno" });
   }
 };

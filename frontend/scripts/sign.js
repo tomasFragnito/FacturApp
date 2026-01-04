@@ -11,7 +11,7 @@ const PORT = 3000;
 console.log(inputName.value,inputEmail.value,inputPass.value);
 
 async function registerUser(){
-    const user = await fetch("http://localhost:"+PORT+"/users/sign", {
+    const user = await fetch("http://localhost:"+PORT+"/user/sign", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

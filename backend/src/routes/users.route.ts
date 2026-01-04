@@ -1,14 +1,15 @@
 import express from "express" 
-import { checkUser, register, hello, login } from '../controllers/user.controller.js';
-
+import { checkUser, register, loginController, hello } from '../controllers/user.controller';
+import { requireEmailAndPassword } from "../middleware/auth.middleware";
+import { hashPasswordMiddleware } from "../middleware/password.middleware";
 
 const router = express.Router()
 
 router.get('/exists', checkUser);
 
-router.post('/sign', register);
+router.post('/sign',hashPasswordMiddleware, register);
 
-router.post('/login', login);
+router.post('/login', requireEmailAndPassword, loginController);
 
 router.get('/hello', hello);
 

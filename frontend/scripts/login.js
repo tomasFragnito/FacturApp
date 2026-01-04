@@ -18,15 +18,19 @@ async function searchUser(){
 }
 
 async function loginUser(){
-    const res = await fetch(PORT+"/user/login",
+    const res = await fetch("http://localhost:"+PORT+"/user/login",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            // Automatically converted to "username=example&password=password"
-            body: new URLSearchParams({ email: inputEmail, password: inputPass }),
+            body: JSON.stringify({
+                email: inputEmail.value,
+                password: inputPass.value
+            }),
             mode: "cors"
         }
     );
+
+    console.log("res ok ->"+res.ok);
     
     if (!res.ok) {
         console.error("Credenciales inválidas");
@@ -34,7 +38,7 @@ async function loginUser(){
     }
 
     console.log("Login OK");
-    //window.location.href = "/index.html";
+    window.location.href = "./index.html";
         
 }
 

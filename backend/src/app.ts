@@ -1,16 +1,22 @@
 import express from "express" // -> ESmodules // const express = require("express") -> commonjs [obsoleto]
 import cors from "cors";
 
-import { connectDB, sequelize } from "./config/db.js";
-import usersRouter from "./routes/users.route.js"
+import { connectDB, sequelize } from "./config/db";
+import usersRouter from "./routes/users.route"
 
-await connectDB();
-await sequelize.sync();
+console.log("🔫");
+
+connectDB();
+sequelize.sync();
 
 const app = express();
 app.use(express.json())
 
-app.use(cors({ origin: true }));
+app.use(cors({
+  origin: "http://127.0.0.1:5500",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 /*
 app.get("/ping", (_req, res) =>{
@@ -25,6 +31,6 @@ app.use((req, _res, next) => {
 });
 
 
-app.use("/users", usersRouter);
+app.use("/user", usersRouter);
 
 export default app;
