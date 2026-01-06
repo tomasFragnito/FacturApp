@@ -1,5 +1,6 @@
 
 import * as userRepository from '../repositories/user.repository';
+import { createWallet } from "../repositories/wallet.repository";
 import bcrypt from "bcryptjs";
 
 export const userExists = async (email: string): Promise<boolean> => {
@@ -20,11 +21,15 @@ export const registerUser = async (
     throw err;
   }
 
-  return userRepository.createUser(
+  const user = await userRepository.createUser(
     name,
     email,
     password
   );
+
+  await createWallet(user.id);
+
+  return user;
 };
 
 export const validateLogin = async (email: string, password: string) => {

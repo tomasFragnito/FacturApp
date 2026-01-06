@@ -7,7 +7,7 @@ import usersRouter from "./routes/users.route"
 console.log("🔫");
 
 connectDB();
-sequelize.sync();
+sequelize.sync({ alter: true });
 
 const app = express();
 app.use(express.json())

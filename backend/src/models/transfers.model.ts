@@ -1,32 +1,31 @@
-//import { timeStamp } from 'console';
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-export class User extends Model {
+export class Transfers extends Model {
   declare id: number;
-  declare name: string;
-  declare email: string;
-  declare password: string;
+  declare from_user_id: number;
+  declare to_user_id: number;
+  declare amount: number;
   declare created_at?: Date;
 }
 
-export function initUserModel(sequelizeInstance: Sequelize) {
-  User.init(
+export function initTransfersModel(sequelizeInstance: Sequelize) {
+  Transfers.init(
     {
       id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
-        type: DataTypes.STRING(100),
+      from_user_id: {
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING(150),
+      to_user_id: {
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
-      password: {
-        type: DataTypes.STRING(255),
+      amount: {
+        type: DataTypes.DECIMAL(15, 2),
         allowNull: false,
       },
       created_at: {
@@ -36,7 +35,7 @@ export function initUserModel(sequelizeInstance: Sequelize) {
     },
     {
       sequelize: sequelizeInstance,
-      tableName: 'users',
+      tableName: 'transfers',
       timestamps: false,
     }
   );
