@@ -3,7 +3,7 @@ import cors from "cors";
 
 import { connectDB, sequelize } from "./config/db";
 import usersRouter from "./routes/users.route";
-import transferRouter from "./routes/transfer.route";
+import walletRouter from "./routes/wallet.route";
 
 console.log("🔫");
 
@@ -33,6 +33,6 @@ app.use((req, _res, next) => {
 
 
 app.use("/user", usersRouter);
-app.use("/transfer", transferRouter);
+app.use("/wallet", walletRouter);
 
 export default app;

@@ -16,6 +16,7 @@ export const searchUser = async (email: string) => {
   return user;
 };
 
+
 export const registerUser = async (
   name: string,
   email: string,

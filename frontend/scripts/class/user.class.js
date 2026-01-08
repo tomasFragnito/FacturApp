@@ -1,29 +1,29 @@
+import PORT_APP from "../globalConst.js";
+
 export class User{
-    constructor(name, mail, password){
-        this.name = name;
-        this.mail = mail;
-        this.password = password;
+    constructor(balance = 0){
+        this.balance = balance;
     }
 
-    getLogin(){
-        //mandar un get al back para el ingreso
+    static saveToken(token) {
+        localStorage.setItem("token", token);
     }
 
-    postCreateUser(){
-        //crear user
+    static getToken() {
+        return localStorage.getItem("token");
     }
 
-    getLocalStorage(){
-        const ls = localStorage.getItem("user");
-
-        if (!ls) {
-            return null;
-        } else {
-            return JSON.parse(ls);
-        } 
+    static clearToken() {
+        localStorage.removeItem("token");
     }
 
-    setLocalStorage(){
-        localStorage.setItem("user", JSON.stringify(this.name,this.mail,this.password));   
+    static saveBalance(balance) {
+        localStorage.setItem("balance", balance.toString());
     }
+
+    static getBalance() {
+        const balance = localStorage.getItem("balance");
+        return balance ? Number(balance) : 0;
+    }
+    
 }

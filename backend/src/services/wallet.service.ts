@@ -15,3 +15,13 @@ export const depositWallet = async (userId: number, amount: number) => {
 
   return wallet;
 }
+
+export const getWalletUser = async (userId: number) => {
+  const wallet = await walletRepository.findwalletByIdUser(userId);
+
+  if (!wallet) {
+    throw new Error("Wallet no encontrada");
+  }
+
+  return wallet;
+};

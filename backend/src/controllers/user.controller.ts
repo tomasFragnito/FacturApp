@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as userService from "../services/user.service";
+import { createToken } from "../services/auth.service";
 
 export const checkUser = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.query;
@@ -21,20 +22,13 @@ export const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   const user = await userService.validateLogin(email, password);
-
   if (!user) {
-    res.status(401).json({ error: "Credenciales inválidas" });
-    return;
+    return res.status(401).json({ error: "Credenciales inválidas" });
   }
 
-  res.status(200).json({
-    message: "Login OK",
-    user: {
-      id: user.id,
-      email: user.email,
-      name: user.name
-    }
-  });
+  const token = createToken(user.id);
+
+  return res.status(200).json({ token });
 };
 
 export const register = async (
