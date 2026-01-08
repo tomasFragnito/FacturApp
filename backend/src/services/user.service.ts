@@ -8,6 +8,14 @@ export const userExists = async (email: string): Promise<boolean> => {
   return user !== null;
 };
 
+export const searchUser = async (email: string) => {
+  const user = await userRepository.findByEmail(email);
+  if (!user){
+    console.error("error user.service searchUser")
+  }
+  return user;
+};
+
 export const registerUser = async (
   name: string,
   email: string,

@@ -2,7 +2,8 @@ import express from "express" // -> ESmodules // const express = require("expres
 import cors from "cors";
 
 import { connectDB, sequelize } from "./config/db";
-import usersRouter from "./routes/users.route"
+import usersRouter from "./routes/users.route";
+import transferRouter from "./routes/transfer.route";
 
 console.log("🔫");
 
@@ -32,5 +33,6 @@ app.use((req, _res, next) => {
 
 
 app.use("/user", usersRouter);
+app.use("/transfer", transferRouter);
 
 export default app;
