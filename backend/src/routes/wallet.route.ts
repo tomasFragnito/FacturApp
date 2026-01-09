@@ -1,17 +1,16 @@
-import express from "express" 
-import { walletController, updateBalance } from '../controllers/wallet.controller';
+import express from "express";
+import { getBalanceController, depositController, withdrawController } from "../controllers/wallet.controller";
 import { authJwt } from "../middleware/auth.middleware";
 
-const router = express.Router()
+const router = express.Router();
 
-//router.post("/deposit/:amount?", walletController);
-//router.get("/updateBalance/:mail?", updateBalance);
+// Balance
+router.get("/balance", authJwt, getBalanceController);
 
-router.post("/");
+// Depositar
+router.post("/deposit", authJwt, depositController);
 
-//router.get("/:amount?", walletController);
+// Retirar
+router.post("/withdraw", authJwt, withdrawController);
 
-router.post("/deposit/:amount", authJwt, walletController);
-router.get("/updateBalance", authJwt, updateBalance);
-
-export default router
+export default router;

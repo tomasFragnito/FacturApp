@@ -1,18 +1,45 @@
 import { User } from "./class/user.class.js";
-import { getBalance } from "./wallet.js";
 
-const moneyUser = document.getElementById("moneyUser");
+const inputMoney = document.getElementById("moneyUserAgregate");
+const btnAdd = document.getElementById("btnMoneyUserAgregate");
+const btnWithdraw = document.getElementById("btnMoneyUserWithdraw");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  if (!User.getToken()) {
-    window.location.href = "./login.html";
-    return;
+  try {
+    const moneyUser = document.getElementById("moneyUser");
+    console.log(moneyUser)
+
+    if (!moneyUser) return;
+    
+    const balance = await User.updateBalance();
+    moneyUser.textContent = balance;
+  } catch (e) {
+    console.error(e);
   }
+});
+
+btnAdd.addEventListener("click", async () => {
+  const amount = Number(inputMoney.value);
+  if (amount <= 0) return;
 
   try {
-    const data = await getBalance();
-    moneyUser.textContent = data.balance;
-  } catch (err) {
-    console.error(err);
+    const balance = await User.depositMoney(amount);
+    moneyUser.textContent = balance;
+    inputMoney.value = "";
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+btnWithdraw.addEventListener("click", async () => {
+  const amount = Number(inputMoney.value);
+  if (amount <= 0) return;
+
+  try {
+    const balance = await User.withdrawMoney(amount);
+    moneyUser.textContent = balance;
+    inputMoney.value = "";
+  } catch (e) {
+    console.error(e);
   }
 });

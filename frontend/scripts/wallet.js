@@ -1,8 +1,6 @@
 import PORT_APP from "./globalConst.js";
 import { User } from "./class/user.class.js";
 
-//btnMoneyUserAgregate.addEventListener("click", transferAmount);
-
 function authHeaders() {
   return {
     "Authorization": "Bearer " + User.getToken(),
@@ -10,31 +8,40 @@ function authHeaders() {
   };
 }
 
-export async function getBalance() {
+export async function fetchBalance() {
   const res = await fetch(
-    `http://localhost:${PORT_APP}/wallet/updateBalance`,
+    "http://localhost:"+PORT_APP+"/wallet/balance",
+    { method: "GET", headers: authHeaders() }
+  );
+
+  if (!res.ok) throw new Error("Error HTTP " + res.status);
+  return res.json();
+}
+
+export async function deposit(amount) {
+  const res = await fetch(
+    "http://localhost:"+PORT_APP+"/wallet/deposit",
     {
-      method: "GET",
-      headers: authHeaders()
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ amount })
     }
   );
 
-  if (!res.ok) {
-    throw new Error("Error HTTP " + res.status);
-  }
-
-  return await res.json();
+  if (!res.ok) throw new Error("Error HTTP " + res.status);
+  return res.json();
 }
 
-async function transferAmount(){
-    const user = await fetch("http://localhost:"+PORT_APP+"/transfer/"+moneyUserAgregate.value, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            email: inputEmail.value
-        }),
-    });
-        
+export async function withdraw(amount) {
+  const res = await fetch(
+    "http://localhost:"+PORT_APP+"/wallet/withdraw",
+    {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ amount })
+    }
+  );
+
+  if (!res.ok) throw new Error("Error HTTP " + res.status);
+  return res.json();
 }

@@ -34,3 +34,10 @@ CREATE TABLE loans (
 
 CREATE INDEX idx_transfer_from ON transfers(from_user_id);
 CREATE INDEX idx_transfer_to ON transfers(to_user_id);
+
+
+User: lógica de negocio del usuario (wallet incluida)
+
+wallet.js: solo comunicación con backend
+
+main.js / index.js: UI + eventos
