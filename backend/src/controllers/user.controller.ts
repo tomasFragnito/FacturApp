@@ -13,6 +13,26 @@ export const checkUser = async (req: Request, res: Response): Promise<Response> 
   return res.json({ exists });
 };
 
+export const getName = async (req: Request, res: Response) => {
+  try {
+
+    if (!req.user) {
+      return res.status(401).json({ error: "No autorizado" });
+    }
+
+    const name = await userService.getUserName(req.user.id);
+    return res.json({ name });
+
+  } catch (err: any) {
+    console.error(err);
+
+    if (err.status) {
+      return res.status(err.status).json({ error: err.message });
+    }
+
+    return res.status(500).json({ error: "Error interno" });
+  }
+};
 export const hello = async (_req: Request, res: Response): Promise<Response> => {
 
   return res.json("hello");

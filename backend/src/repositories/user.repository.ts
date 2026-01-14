@@ -7,6 +7,12 @@ export const findByEmail = async (email: string): Promise<User | null> => {
   });
 };
 
+export const findUserNameById = async (id: number) => {
+  return User.findByPk(id, {
+    attributes: ["id", "name"],
+  });
+};
+
 export const createUser = async (
   name: string,
   email: string,

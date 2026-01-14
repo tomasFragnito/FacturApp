@@ -16,6 +16,14 @@ export const searchUser = async (email: string) => {
   return user;
 };
 
+export const getUserName = async (userId: number) => {
+  const user = await userRepository.findUserNameById(userId);
+  if (!user){
+    console.error("error user.service searchUser")
+  }
+  return user?.name;
+};
+
 
 export const registerUser = async (
   name: string,

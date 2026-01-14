@@ -2,6 +2,10 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+export interface AuthRequest extends Request {
+  userId?: number;
+}
+
 export const requireEmailAndPassword = (req: Request, res: Response, next: NextFunction) => {
   if (!req.body.email || !req.body.password) {
     res.status(400).json({ error: "Datos incompletos" });

@@ -17,35 +17,46 @@ export const getBalanceController = async (req: Request, res: Response) => {
 };
 
 export const depositController = async (req: Request, res: Response) => {
-  const { amount } = req.body;
+  try{
+    const { amount } = req.body;
 
-  if (!amount || isNaN(amount) || amount <= 0) {
-    return res.status(400).json({ error: "Monto inválido" });
+    if (!amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: "Monto inválido" });
+    }
+
+    const userId = req.user!.id;
+
+    const wallet = await walletService.depositWallet(userId, Number(amount));
+
+    return res.json({
+      balance: wallet.balance,
+      updated_at: wallet.updated_at
+    });
   }
-
-  const userId = req.user!.id;
-
-  const wallet = await walletService.depositWallet(userId, Number(amount));
-
-  return res.json({
-    balance: wallet.balance,
-    updated_at: wallet.updated_at
-  });
+  catch(error:any){
+    return res.status(error.status || 500).json({error:error.body || "error interno"});
+  }
 };
 
 export const withdrawController = async (req: Request, res: Response) => {
-  const { amount } = req.body;
+  try{
+    const { amount } = req.body;
 
-  if (!amount || isNaN(amount) || amount <= 0) {
-    return res.status(400).json({ error: "Monto inválido" });
+    if (!amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: "Monto inválido" });
+    }
+
+    const userId = req.user!.id;
+
+    const wallet = await walletService.withdrawWallet(userId, Number(amount));
+
+    return res.json({
+      balance: wallet.balance,
+      updated_at: wallet.updated_at
+    });
+  }
+  catch(error: any){
+    return res.status(error.status || 500).json({error:error.body || "error interno"});
   }
 
-  const userId = req.user!.id;
-
-  const wallet = await walletService.withdrawWallet(userId, Number(amount));
-
-  return res.json({
-    balance: wallet.balance,
-    updated_at: wallet.updated_at
-  });
 };

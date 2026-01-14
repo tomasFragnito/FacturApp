@@ -1,45 +1,28 @@
 import { User } from "./class/user.class.js";
 
-const inputMoney = document.getElementById("moneyUserAgregate");
-const btnAdd = document.getElementById("btnMoneyUserAgregate");
-const btnWithdraw = document.getElementById("btnMoneyUserWithdraw");
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+
+    await User.fetchAndSaveName();
+    const user = new User();
+    
     const moneyUser = document.getElementById("moneyUser");
-    console.log(moneyUser)
+    console.log(moneyUser);
+
+    const nameUser = document.getElementById("nameUser");
 
     if (!moneyUser) return;
     
     const balance = await User.updateBalance();
     moneyUser.textContent = balance;
+
+    nameUser.textContent = user.name;
+    console.log("nombre"+user.name);
+
+    console.log(balance)
   } catch (e) {
     console.error(e);
   }
 });
 
-btnAdd.addEventListener("click", async () => {
-  const amount = Number(inputMoney.value);
-  if (amount <= 0) return;
 
-  try {
-    const balance = await User.depositMoney(amount);
-    moneyUser.textContent = balance;
-    inputMoney.value = "";
-  } catch (e) {
-    console.error(e);
-  }
-});
-
-btnWithdraw.addEventListener("click", async () => {
-  const amount = Number(inputMoney.value);
-  if (amount <= 0) return;
-
-  try {
-    const balance = await User.withdrawMoney(amount);
-    moneyUser.textContent = balance;
-    inputMoney.value = "";
-  } catch (e) {
-    console.error(e);
-  }
-});

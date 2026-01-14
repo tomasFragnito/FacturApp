@@ -1,11 +1,13 @@
 import express from "express" 
-import { checkUser, register, loginController, hello } from '../controllers/user.controller';
-import { requireEmailAndPassword } from "../middleware/auth.middleware";
+import { checkUser, register, loginController, hello, getName } from '../controllers/user.controller';
+import { authJwt, requireEmailAndPassword } from "../middleware/auth.middleware";
 import { hashPasswordMiddleware } from "../middleware/password.middleware";
 
 const router = express.Router()
 
 router.get('/exists', checkUser);
+
+router.get('/name', authJwt, getName);
 
 router.post('/sign',hashPasswordMiddleware, register);
 

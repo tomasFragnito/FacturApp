@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menu</title>
+    <title>withdraw</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/index.css">
 </head>
@@ -11,26 +11,16 @@
 <body>
     <header>
         <p>header</p>
+        <a href="./index.html">back</a>
     </header>
 
     <main>
         <p>main</p>
         <div id="datesUser">
-            <p>gmail</p>
-            <p id="gmailUser"></p>
-            <p>nombre</p>
-            <p id="nameUser"></p>
             <span>$</span>
             <span id="moneyUser"></span>
-            <div>
-                <a href="./deposit.html">deposit</a>
-                <a href="./transfer.html">transfer</a>
-                <a href="./withdraw.html">withdraw</a>
-                <a href="">your alias</a>
-            </div>
-        </div>
-        <div>
-            <p>imagen</p>
+            <input id="InputmoneyUser" type="number">
+            <button id="btnMoneyUserWithdraw">Withdraw</button>
         </div>
     </main>
 
@@ -48,6 +38,7 @@
         <p>footer</p>
     </footer>
 
+    <script type="module" src="../scripts/withdraw.js"></script>
     <script type="module" src="../scripts/main.js"></script>
 </body>
 </html>

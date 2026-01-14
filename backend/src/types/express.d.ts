@@ -7,5 +7,8 @@ declare global {
         id: number;
       };
     }
+    interface Request {
+      user?: User;
+    }
   }
 }

@@ -1,6 +1,12 @@
 import { fetchBalance, deposit, withdraw } from "../wallet.js";
+import { fetchName } from "../user.js";
 
 export class User {
+  constructor(){
+    this.balance = User.getBalance();
+    this.name = User.getName();
+  }
+
   static saveToken(token) {
     localStorage.setItem("token", token);
   }
@@ -18,7 +24,21 @@ export class User {
   }
 
   static getBalance() {
-    return Number(localStorage.getItem("balance")) || 0;
+    return Number(localStorage.getItem("balance")) || "error";
+  }
+
+  static saveName(name) {
+    localStorage.setItem("name", name);
+  }
+
+  static getName() {
+    return localStorage.getItem("name") || "error";
+  }
+
+  static async fetchAndSaveName() {
+    const name = await fetchName();
+    User.saveName(name);
+    return name;
   }
 
   // Wallet logic

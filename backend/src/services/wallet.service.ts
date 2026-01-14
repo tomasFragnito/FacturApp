@@ -40,13 +40,13 @@ export const depositWallet = async (userId: number, amount: number) => {
  */
 export const withdrawWallet = async (userId: number, amount: number) => {
   if (amount <= 0) {
-    throw new Error("Monto inválido");
+    throwError("Monto inválido", 400);
   }
 
   const wallet = await getWalletOrFail(userId);
 
-  if (wallet.balance < amount) {
-    throw new Error("Saldo insuficiente");
+  if (Number(wallet.balance) < amount) {
+    throwError("Saldo insuficiente", 409);
   }
 
   await walletRepository.addBalanceToWallet(wallet, -amount);
