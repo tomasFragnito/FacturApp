@@ -10,7 +10,8 @@ Versionado NodeJs
 se opto por bcryptjs y no por bcrypt por temas de estabilidad
   
 
-
+JWT_SECRET=super_secreto_123
+JWT_EXPIRES=12h
 
 tasks:
     screen_
